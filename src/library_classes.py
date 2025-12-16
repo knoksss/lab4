@@ -24,7 +24,7 @@ class Book:
     def __eq__(self, other: object) -> bool: # сравнение книг по isbn
         if not isinstance(other, Book):
             return False
-        return self._isbn == other._isbn
+        return self.isbn == other.isbn
     
 
 class Magazine(Book): # журнал - наследник класса "книга"
@@ -102,17 +102,17 @@ class BookCollection: # коллекция книг
 
         
     def add_to_collection(self, book: Book) -> None: # добавление книги в коллекцию
-        self.books.append(book)
+        self._books.append(book)
 
 
     def remove_from_collection(self, book: Book) -> None: # удаление книги из коллекции
         if book not in self._books:
             raise ValueError('Error: попытка удалить несуществующий элемент')
-        self.books.remove(book)
+        self._books.remove(book)
 
 
     def clear(self) -> None: # очистка коллекции
-        self.books = []
+        self._books = []
 
 
     def is_empty(self) -> bool: # проверка на пустоту коллекции
