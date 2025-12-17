@@ -240,31 +240,40 @@ class IndexDict: # словарь с индексами для быстрого 
             print(f"Error: неверный isbn - '{isbn}'")
     
 
-    def get_by_author(self, author: str): # поиск книг по автору
+    def get_by_author(self, author: str):  # поиск книг по автору
         try:
-            books = list(self._by_author.get(author, set()))
+            book_collection = self._by_author[author]
+            books = list(book_collection)
             print(f"Поиск по автору '{author}': найдено {len(books)} книг(и)")
             return books
+        
         except KeyError:
-            print(f"Error: неверный автор - '{author}'")
-    
-    
-    def get_by_year(self, year: int): # поиск книг по году
+            print(f"Автор '{author}' не найден в каталоге")
+            return []
+
+
+    def get_by_year(self, year: int):  # поиск книг по году
         try:
-            books = list(self._by_year.get(year, set()))
+            book_collection = self._by_year[year]
+            books = list(book_collection)
             print(f"Поиск по году {year}: найдено {len(books)} книг(и)")
             return books
+        
         except KeyError:
-            print(f"Error: неверный год - '{year}'")
+            print(f"Книги {year} года не найдены в каталоге")
+            return []
     
     
-    def get_by_genre(self, genre: str): # поиск книг по жанру
+    def get_by_genre(self, genre: str):  # поиск книг по жанру
         try:
-            books = list(self._by_genre.get(genre, set()))
+            book_collection = self._by_genre[genre]
+            books = list(book_collection)
             print(f"Поиск по жанру '{genre}': найдено {len(books)} книг(и)")
             return books
+        
         except KeyError:
-            print(f"Error: неверный жанр - '{genre}'")
+            print(f"Книги жанра '{genre}' не найдены в каталоге")
+            return []
 
 
 class Library: # класс библиотеки
