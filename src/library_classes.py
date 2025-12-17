@@ -28,8 +28,8 @@ class Book:
     
 
 class Magazine(Book): # журнал - наследник класса "книга"
-    def __init__(self, title, author, year, number, month):
-        super().__init__(title, author, year)
+    def __init__(self, title: str, author: str, year: int, number: int, month: str, genre: str = "Журнал", isbn: str = ""):
+        super().__init__(title, author, year, genre, isbn)
         self.number = number # номер выпуска
         self.month = month # месяц выпуска
     
@@ -43,8 +43,8 @@ class Magazine(Book): # журнал - наследник класса "книг
         
 
 class TrainigMaterial(Book): # методическое пособие - наследник класса "книга"
-    def __init__(self, title, author, year, edu_institution, readers):
-        super().__init__(title, author, year)
+    def __init__(self, title: str, author: str, year: int, number: int, month: str, genre: str = "Методическое пособие", isbn: str = ""):
+        super().__init__(title, author, year, genre, isbn)
         self.edu_institution = edu_institution # учебное заведение
         self.readers = readers # читатели
 
@@ -71,8 +71,8 @@ class BookCollection: # коллекция книг
 
     def __getitem__(self, index: int | slice): # доступ по индексу или срезу
         if isinstance(index, int):
-            if 0 <= index < len(self.values):
-                return self.values[index]
+            if 0 <= index < len(self._books):
+                return self._books[index]
             else:
                 raise IndexError("Error: выход за пределы, индекс превышает длину")
         elif isinstance(index, slice):
@@ -98,7 +98,7 @@ class BookCollection: # коллекция книг
     
     
     def __setitem__(self, index: int, book: Book) -> None: # установка книги по индексу
-        self._items[index] = book
+        self._books[index] = book
 
         
     def add_to_collection(self, book: Book) -> None: # добавление книги в коллекцию
