@@ -43,7 +43,8 @@ class Magazine(Book): # журнал - наследник класса "книг
         
 
 class TrainigMaterial(Book): # методическое пособие - наследник класса "книга"
-    def __init__(self, title: str, author: str, year: int, number: int, month: str, genre: str = "Методическое пособие", isbn: str = ""):
+    def __init__(self, title: str, author: str, year: int, edu_institution: int,
+                   readers: str, genre: str = "Методическое пособие", isbn: str = ""):
         super().__init__(title, author, year, genre, isbn)
         self.edu_institution = edu_institution # учебное заведение
         self.readers = readers # читатели
